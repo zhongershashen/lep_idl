@@ -1,1 +1,0 @@
-namespace go lep_material
