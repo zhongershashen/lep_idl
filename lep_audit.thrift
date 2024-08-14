@@ -1,4 +1,4 @@
-include "../../base.thrift"
+include "base.thrift"
 namespace go lep_audit
 struct AuditInfo {
     1: i64 id

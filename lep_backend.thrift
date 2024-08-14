@@ -147,7 +147,6 @@ service LepBackend {
     AuditResp Audit(1: AuditReq request) (api.post="/lep_backend/audit/audit");
     AuditListResp AuditList(1: AuditListReq request) (api.get="/lep_backend/audit/list");
     AuditDetailResp AuditDetail(1: AuditDetailReq request) (api.post="/lep_backend/audit/detail");
-
 }
 
 

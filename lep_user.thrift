@@ -1,4 +1,4 @@
-include "../../base.thrift"
+include "base.thrift"
 namespace go lep_user
 // 权限相关
 struct Permission {
@@ -123,4 +123,19 @@ struct UpsertMaterialRequest {
 struct UpsertMaterialResp {
     1: i64 material_id
     255: base.BaseResp BaseResp
+}
+
+service LepUser{
+    // 权限相关
+    PermissionListResp PermissionList(1:PermissionListRequest req)
+    UpsertPermissionResp UpsertPermission(1: UpsertMaterialRequest req)
+    // 角色相关
+    RoleListResp RoleList(1: RoleListRequest req)
+    UpsertRoleResp UpsertRole(1: UpsertRoleRequest req)
+    // 用户相关
+    UserListResp UserList(1: UserListRequest req)
+    UpsertUserResp UpsertUser(1: UpsertUserRequest req)
+    // 物料相关
+    MaterialListResp MaterialList(1: MaterialListRequest req)
+    UpsertMaterialResp UpsertMaterial(1: UpsertMaterialRequest req)
 }
