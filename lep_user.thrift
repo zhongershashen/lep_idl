@@ -7,12 +7,12 @@ struct Permission {
     3: string permission_name
     4: string permission_desc
     5: string extra
-    6: string created_time
-    7: string updated_time
+    6: i64 created_time
+    7: i64 updated_time
 }
 struct PermissionListRequest {
-     1: optional i64 offset
-     2: optional i64 limit
+     1: required i64 offset
+     2: required i64 limit
      3: optional string permission_key
      4: optional string permission_name
 }
@@ -36,13 +36,13 @@ struct Role {
     3: string role_key
     4: string role_desc
     5: string extra
-    6: optional string created_time
-    7: optional string updated_time
+    6: optional i64 created_time
+    7: optional i64 updated_time
     8: list<Permission> permission_list
 }
 struct RoleListRequest {
-     1: optional i64 offset
-     2: optional i64 limit
+     1: required i64 offset
+     2: required i64 limit
      3: optional string role_key
      4: optional string role_name
 }
@@ -66,15 +66,15 @@ struct User {
     3: string user_avatar
     4: string role_key
     5: string extra
-    6: optional string created_time
-    7: optional string updated_time
+    6: optional i64 created_time
+    7: optional i64 updated_time
     8: list<Permission> permission_list
     9: string phone
     10: string role_name
 }
 struct UserListRequest {
-    1: optional i64 offset
-    2: optional i64 limit
+    1: required i64 offset
+    2: required i64 limit
     3: optional string user_id
     4: optional string role_key
     5: optional string phone
@@ -100,12 +100,12 @@ struct Material{
     4: string material_key // 物料key
     5: string material_value // 物料值
     6: i64 is_deleted // 0-未删除; 1-已删除
-    7: optional string created_time
-    8: optional string updated_time
+    7: optional i64 created_time
+    8: optional i64 updated_time
 }
 struct MaterialListRequest {
-    1: optional i64 offset
-    2: optional i64 limit
+    1: required i64 offset
+    2: required i64 limit
     3: optional i64 material_type
     4: optional string material_key
     6: optional i64 user_id
