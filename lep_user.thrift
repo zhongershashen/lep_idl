@@ -15,7 +15,6 @@ struct PermissionListRequest {
      2: optional i64 limit
      3: optional string permission_key
      4: optional string permission_name
-     5: optional string role_key
 }
 struct PermissionListResp{
     1: i64 total
