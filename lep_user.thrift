@@ -23,7 +23,6 @@ struct PermissionListResp{
 }
 struct UpsertPermissionRequest {
      1: required Permission permission
-     2: i32 op_type // 1-新增，2-更新，3-删除
 }
 struct UpsertPermissionResp{
     1: i64 permission_id
@@ -36,8 +35,8 @@ struct Role {
     3: string role_key
     4: string role_desc
     5: string extra
-    6: optional i64 created_time
-    7: optional i64 updated_time
+    6: i64 created_time
+    7: i64 updated_time
     8: list<Permission> permission_list
 }
 struct RoleListRequest {
@@ -53,7 +52,6 @@ struct RoleListResp{
 }
 struct UpsertRoleRequest {
      1: required Role role
-     2: i32 op_type // 1-新增，2-更新，3-删除
 }
 struct UpsertRoleResp{
     1: i64 role_id
@@ -66,11 +64,12 @@ struct User {
     3: string user_avatar
     4: string role_key
     5: string extra
-    6: optional i64 created_time
-    7: optional i64 updated_time
+    6: i64 created_time
+    7: i64 updated_time
     8: list<Permission> permission_list
     9: string phone
     10: string role_name
+    11: string password
 }
 struct UserListRequest {
     1: required i64 offset
@@ -86,7 +85,6 @@ struct UserListResp{
 }
 struct UpsertUserRequest {
      1: required User user
-     2: i32 op_type // 1-新增，2-更新，3-删除
 }
 struct UpsertUserResp {
     1: i64 user_id
@@ -100,8 +98,8 @@ struct Material{
     4: string material_key // 物料key
     5: string material_value // 物料值
     6: i64 is_deleted // 0-未删除; 1-已删除
-    7: optional i64 created_time
-    8: optional i64 updated_time
+    7: i64 created_time
+    8: i64 updated_time
 }
 struct MaterialListRequest {
     1: required i64 offset
@@ -117,24 +115,50 @@ struct MaterialListResp {
 }
 struct UpsertMaterialRequest {
      1: required list<Material> material
-     2: i32 op_type // 1-新增，2-更新，3-删除
 }
 struct UpsertMaterialResp {
-    1: i64 material_id
+    1: list<i64> material_id
     255: base.BaseResp BaseResp
 }
-
+struct DeletePermissionResp{
+    255: base.BaseResp BaseResp
+}
+struct DeleteRoleResp{
+    255: base.BaseResp BaseResp
+}
+struct DeleteUserResp{
+    255: base.BaseResp BaseResp
+}
+struct DeleteMaterialResp{
+    255: base.BaseResp BaseResp
+}
+struct DeletePermissionRequest{
+    1: required i64 id
+}
+struct DeleteRoleRequest{
+    1: required i64 id
+}
+struct DeleteUserRequest{
+    1: required i64 id
+}
+struct DeleteMaterialRequest{
+    1: required i64 id
+}
 service LepUser{
     // 权限相关
     PermissionListResp PermissionList(1:PermissionListRequest req)
-    UpsertPermissionResp UpsertPermission(1: UpsertMaterialRequest req)
+    UpsertPermissionResp UpsertPermission(1: UpsertPermissionRequest req)
+    DeletePermissionResp DeletePermission (1: DeletePermissionRequest req)
     // 角色相关
     RoleListResp RoleList(1: RoleListRequest req)
     UpsertRoleResp UpsertRole(1: UpsertRoleRequest req)
+    DeleteRoleResp DeleteRole(1: DeleteRoleRequest req)
     // 用户相关
     UserListResp UserList(1: UserListRequest req)
     UpsertUserResp UpsertUser(1: UpsertUserRequest req)
+    DeleteUserResp DeleteUser(1: DeleteUserRequest req)
     // 物料相关
     MaterialListResp MaterialList(1: MaterialListRequest req)
     UpsertMaterialResp UpsertMaterial(1: UpsertMaterialRequest req)
+    DeleteMaterialResp DeleteMaterial(1: DeleteMaterialRequest req)
 }
