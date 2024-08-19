@@ -27,7 +27,7 @@ struct AuditListResp{
     2: i64 total
     3: base.BaseResp BaseResp
 }
-struct CreateAudit {
+struct CreateAuditReq {
     1: required i32 audit_type // 1-物料审核，2-需求审核
     2: required i32 target_id // 审核目标id
     3: required i32 target_type // 审核目标类型 // 1-文字，2-图片，3-视频，4-文件
@@ -44,12 +44,14 @@ struct AuditReq{
     1: required i64 audit_id
     2: required i64 operation // 1-通过，2-驳回
     3: optional string fail_reason // 驳回原因
+    4: required i64 audit_user_id
+    5: required string audit_user_name
 }
 struct AuditResp{
     1: base.BaseResp BaseResp
 }
 service LepAudit{
     AuditResp Audit(1: AuditReq req)
-    CreateAuditResp CreateAudit(1: CreateAudit req)
+    CreateAuditResp CreateAudit(1: CreateAuditReq req)
     AuditListResp AuditList (1: AuditListReq req)
 }
