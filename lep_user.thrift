@@ -144,6 +144,14 @@ struct DeleteUserRequest{
 struct DeleteMaterialRequest{
     1: required i64 id
 }
+struct CheckUserResp{
+    1: optional i64 user_id
+}
+struct CheckUserReq{
+    1: required string user_name
+    2: required string phone
+    3: required string password
+}
 service LepUser{
     // 权限相关
     PermissionListResp PermissionList(1:PermissionListRequest req)
@@ -161,4 +169,6 @@ service LepUser{
     MaterialListResp MaterialList(1: MaterialListRequest req)
     UpsertMaterialResp UpsertMaterial(1: UpsertMaterialRequest req)
     DeleteMaterialResp DeleteMaterial(1: DeleteMaterialRequest req)
+    // 鉴权相关
+    CheckUserResp CheckUser(1: CheckUserReq req)
 }

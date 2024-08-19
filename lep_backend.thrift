@@ -22,13 +22,15 @@ struct LoginReq {
     1: required string phone // 手机号
     2: optional string password // 密码
     3: optional string verify_code // 验证码
+    4: optional string user_name // 用户名
 }
 struct LoginData {
     1: required string user_id // 用户user_id
     2: required string user_name // 用户token
     3: required string user_avatar // 头像
-    4: required string role_name // 用户token
-    5: required list<string> permission_key_list // 权限key列表
+    4: required string role_name  // 角色
+    5: required list<string> permission_list // 权限key列表
+    6: required string phone
 }
 struct LoginResp {
     1: required string message // 提示
@@ -133,7 +135,7 @@ service LepBackend {
     // ---------------User------------------
     // 获取验证吗
     GetVerifyCodeResp GetVerifyCode(1: GetVerifyCodeReq request) (api.get="/lep_backend/user/verify_code");
-    // 登陆-没有注册则自动注册
+    // 登陆
     LoginResp Login(1: LoginReq request) (api.post="/lep_backend/user/login");
     // 修改用户信息
     UpdateUserResp UpdateUser(1: UpdateUserReq request) (api.post="/lep_backend/user/update");
@@ -141,7 +143,6 @@ service LepBackend {
     GetMaterialResp GetMaterial(1: GetMaterialReq request) (api.get="/lep_backend/user/material/list");
     // 上传物料
     UpsertMaterialResp UpsertMaterial(1: UpsertMaterialReq request) (api.post="/lep_backend/user/material/upsert");
-
     // ---------------Product------------------
     // ---------------Audit--------------------
     AuditResp Audit(1: AuditReq request) (api.post="/lep_backend/audit/audit");
