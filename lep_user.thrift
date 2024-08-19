@@ -146,6 +146,7 @@ struct DeleteMaterialRequest{
 }
 struct CheckUserResp{
     1: optional i64 user_id
+    255: base.BaseResp BaseResp
 }
 struct CheckUserReq{
     1: required string user_name
